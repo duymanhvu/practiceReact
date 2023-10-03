@@ -1,5 +1,5 @@
 // import axios from 'axios'
-import instance from './customize-axios';
+// import instance from './customize-axios';
 import axios from './customize-axios'
 
 const fetchAllUser = (page) => {
@@ -7,16 +7,22 @@ const fetchAllUser = (page) => {
     
 }
 
-// Add a response interceptor
-instance.interceptors.response.use(function (response) {
-    // Any status code that lie within the range of 2xx cause this function to trigger
-    // Do something with response data
-    return response.data;
-  }, function (error) {
-    // Any status codes that falls outside the range of 2xx cause this function to trigger
-    // Do something with response error
-    return Promise.reject(error);
-  });
+const postCreateUser = (name, job) => {
+  return axios.post("/api/users", {name, job});
+}
+
+const putUpdateUser = (name, job) => {
+  return axios.put("/api/users/2", {name, job});
+
+}
+
+const deleteUser = (id) => {
+  return axios.delete(`/api/users/${id}`);
+}
+
+const loginApi = (email, password) => {
+  return axios.post("/api/login", {email, password});
+}
 
 
-export {fetchAllUser};
+export {fetchAllUser, postCreateUser, putUpdateUser, deleteUser, loginApi};
